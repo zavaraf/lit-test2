@@ -26,25 +26,53 @@ class ConversorLitElement extends LitElement{
 	convertir(e){
 		const numero = this.shadowRoot.querySelector("#numero");
 		const select = this.shadowRoot.querySelector("#select");
+		const select2 = this.shadowRoot.querySelector("#select2");
+
+		let auxCon = 0;
 
 
+//convertimos a Milimetros
 		switch (select.value) {
 			case "mm":
-				this.unidadConver = this.unidad; 
+				auxCon = this.unidad; 
 				break;
 			case "cm":
-				this.unidadConver = this.unidad * 60;
+				auxCon = this.unidad * 10;
 				break;
 			case "in":
-				this.unidadConver = this.unidad * 0.0393701;
+				auxCon = this.unidad * 25.4;
 				break;
 			case "ft":
-				this.unidadConver = this.unidad * 0.00328084;
+				auxCon = this.unidad * 304.8;
 				break;
 			default:
 				// statements_def
 				break;
 		}
+
+	console.log("Milimetros: "+ auxCon);
+	switch (select2.value) {
+			case "mm":
+				this.unidadConver = auxCon ; 
+				break;
+			case "cm":
+				this.unidadConver = auxCon / 10;
+				break;
+			case "in":
+				this.unidadConver = auxCon / 25.4;
+				break;
+			case "ft":
+				this.unidadConver = auxCon / 304.8;
+				break;
+			default:
+				// statements_def
+				break;
+		}
+
+		console.log(this.unidadConver)
+	
+
+
 
 
 	}
@@ -63,6 +91,15 @@ class ConversorLitElement extends LitElement{
         </mwc-textfield>
 
         <mwc-select id="select">
+          ${this.unidades.map( (item) => html `
+          	<mwc-list-item value=${item}>${item}</mwc-list-item>
+          	` )}
+		  
+		</mwc-select>
+
+		<p> A </p>
+
+		<mwc-select id="select2">
           ${this.unidades.map( (item) => html `
           	<mwc-list-item value=${item}>${item}</mwc-list-item>
           	` )}

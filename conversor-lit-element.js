@@ -77,6 +77,15 @@ class ConversorLitElement extends LitElement{
 
 	}
 
+	convertirUnidad(e){
+		this.unidad = e.target.value;
+		this.convertir(e);
+
+		return this.unidad;
+
+	}
+
+
 	render() {
     return html`
       <section id="content">
@@ -86,11 +95,12 @@ class ConversorLitElement extends LitElement{
         <mwc-textfield 
           id="numero"
            @keyup="${(e) => (this.unidad = e.target.value)}"
+           @change="${this.convertir}"
           .value=${this.unidad}
           label="Unidad Inicial en mm">
         </mwc-textfield>
 
-        <mwc-select id="select">
+        <mwc-select id="select" @change="${this.convertir}" >
           ${this.unidades.map( (item) => html `
           	<mwc-list-item value=${item}>${item}</mwc-list-item>
           	` )}
@@ -99,9 +109,11 @@ class ConversorLitElement extends LitElement{
 
 		<p> A </p>
 
-		<mwc-select id="select2">
+		<mwc-select id="select2"
+		@change="${this.convertir}" >
           ${this.unidades.map( (item) => html `
-          	<mwc-list-item value=${item}>${item}</mwc-list-item>
+          	<mwc-list-item 
+          	 value=${item}>${item}</mwc-list-item>
           	` )}
 		  
 		</mwc-select>
